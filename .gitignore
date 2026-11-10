@@ -1,0 +1,19 @@
+# Go build and test artifacts
+*.test
+*.out
+/bin/
+/coverage.html
+
+# Local runtime configuration and secrets
+config.json
+.env
+.env.*
+
+# Temporary files
+/tmp/
+/tmp-*/
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
