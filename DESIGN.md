@@ -186,7 +186,7 @@ open file: no such file or directory
 
 当前版本采取保守策略：
 
-- 解析器支持纯 JSON、Markdown 代码块中的 JSON、以及前后带少量说明文字的 JSON。
+- 解析器支持纯 JSON、Markdown 代码块中的 JSON、以及前后带少量说明文字的 JSON；详细设计见 [docs/parser.md](docs/parser.md)。
 - 如果仍无法解析出合法 Step，立即以 `invalid_response` 终止，并在错误中附带截断后的原始响应。
 - 不在解析失败时自动重试，避免把一次格式错误放大成额外成本和不确定性。
 - 后续可增加“一次修复提示”作为可选策略。
@@ -864,7 +864,7 @@ go run ./cmd/agent \
 3. **read_file**：按新工具定义实现路径约束、大小与编码校验，再补越界和符号链接测试；这是安全边界，应优先完成。
 4. **Tool Registry / Invoker**：实现注册、参数校验与默认值、Schema 暴露、超时、`ToolResult` 归一化和策略能力 fail-closed；确保未知工具和参数错误也能作为 observation 返回。
 5. **LLM Adapter**：按 [docs/llm_adapter.md](docs/llm_adapter.md) 实现 OpenAI 兼容客户端；用 `httptest` 验证请求格式、鉴权、非 2xx、空响应、超时/取消和 DeepSeek reasoning 字段，不在这一层做重试。
-6. **Parser**：实现“提取第一个合法 JSON 对象 + 字段互斥校验”，覆盖代码块和前后说明文字。
+6. **Parser**：按 [docs/parser.md](docs/parser.md) 实现“提取第一个合法 JSON 对象 + 字段互斥校验”，覆盖代码块和前后说明文字。
 7. **Agent Loop**：接入 `Completer` 接口，用脚本化假 LLM 测完 final、max_steps、重复动作、工具失败结果恢复和预算终止。
 8. **CLI**：完成 flag 覆盖、信号处理、stdout/stderr 分离和退出码。
 9. **端到端验证**：本地 mock OpenAI 服务 + 临时文本文件，跑通“读文件 -> 回答”的完整链路，再接入真实模型。
