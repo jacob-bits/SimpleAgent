@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | v0.1 |
-| 状态 | 已实现，测试通过；Agent Loop 与 CLI 已接入 |
+| 状态 | 已实现，测试通过；Agent Loop 与 CLI 已接入，DeepSeek 冒烟通过 |
 | 日期 | 2026-11-10 |
 | 上位设计 | [DESIGN.md](../DESIGN.md) §5.2、§7 |
 | 关联配置 | [internal/config/config.go](../internal/config/config.go#L36) |

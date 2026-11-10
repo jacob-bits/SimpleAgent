@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | v0.1 |
-| 状态 | 已实现，mock 端到端通过；真实模型冒烟待后续 |
+| 状态 | 已实现；mock 端到端与真实 DeepSeek 冒烟通过 |
 | 日期 | 2026-11-11 |
 | 上位设计 | [DESIGN.md](../DESIGN.md) §2.1、§7.3、§10、§13、§14 |
 | 关联设计 | [Agent Loop 详细设计](agent_loop.md)、[LLM Adapter 详细设计](llm_adapter.md)、[read_file 详细设计](read_file.md) |
@@ -644,7 +644,7 @@ go test ./internal/cli -cover
 - [x] 含换行或控制字符的错误文本仍以单行、安全转义的形式显示。
 - [x] `go test ./...`、`go test -race ./...`、`go vet ./...`、`gofmt -l .` 全部通过。
 - [x] mock OpenAI 端到端测试通过，不访问真实外网。
-- [ ] 手动真实模型冒烟一次成功。
+- [x] 手动真实模型冒烟一次成功（DeepSeek deepseek-flash）。
 
 ## 12. 配套文件
 
@@ -714,4 +714,4 @@ README 至少包含：
 | 5 | stdin 读取问题 | 需要 |
 | 6 | shell completion / man page | 暂不需要 |
 
-已按第 13 节实现；mock OpenAI 端到端测试通过，真实模型冒烟待后续。
+已按第 13 节实现；mock OpenAI 端到端测试与真实 DeepSeek 冒烟均已通过。

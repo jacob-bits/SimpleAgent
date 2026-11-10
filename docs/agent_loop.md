@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | v0.1 |
-| 状态 | 已实现，测试通过；CLI 集成已完成 |
+| 状态 | 已实现，测试通过；CLI 集成与真实 DeepSeek 冒烟已完成 |
 | 日期 | 2026-11-10 |
 | 上位设计 | [DESIGN.md](../DESIGN.md) §4、§5.2、§5.3、§6、§9、§10、§11、§14 |
 | 关联设计 | [Parser 详细设计](parser.md)、[LLM Adapter 详细设计](llm_adapter.md)、[工具定义设计](tool_definition.md)、[read_file 详细设计](read_file.md) |

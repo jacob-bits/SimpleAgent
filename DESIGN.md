@@ -872,6 +872,6 @@ go run ./cmd/agent \
 6. **Parser**：按 [docs/parser.md](docs/parser.md) 实现“提取第一个合法 JSON 对象 + 字段互斥校验”，覆盖代码块和前后说明文字。
 7. **Agent Loop**：按 [docs/agent_loop.md](docs/agent_loop.md) 接入 `Completer` 接口，用脚本化假 LLM 测完 final、max_steps、重复动作、工具失败结果恢复和预算终止（已实现）。
 8. **CLI**：按 [docs/cli.md](docs/cli.md) 完成 flag 覆盖、信号处理、stdout/stderr 分离和退出码（已实现）。
-9. **端到端验证**：本地 mock OpenAI 服务 + 临时文本文件，跑通“读文件 -> 回答”的完整链路，再接入真实模型（mock 端到端已完成，真实模型冒烟待后续）。
+9. **端到端验证**：本地 mock OpenAI 服务 + 临时文本文件，跑通“读文件 -> 回答”的完整链路，再接入真实模型（mock 端到端与真实 DeepSeek 冒烟均已完成）。
 
 每一步都以 `go test ./...` 通过为完成标准；真实 LLM 只用于最后的冒烟测试，不作为自动化测试依赖。
