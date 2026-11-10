@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | v0.1 |
-| 状态 | 已实现，测试通过；Agent Loop 已接入 |
+| 状态 | 已实现，测试通过；Agent Loop 与 CLI 已接入 |
 | 日期 | 2026-11-10 |
 | 上位设计 | [DESIGN.md](../DESIGN.md) §4、§5.3、§6.1、§11、§14 |
 | 关联设计 | [LLM Adapter 详细设计](llm_adapter.md)、[工具定义设计](tool_definition.md) |
@@ -685,7 +685,7 @@ go test ./internal/agent -run '^$' -fuzz=FuzzParseStep -fuzztime=30s
 
 每一步以 `go test ./...` 通过为完成标准；Parser 不等待 Agent Loop 就可以独立完成和验收。
 
-截至 v0.1，步骤 1–7（Parser 本身）已实现并通过测试；步骤 8（Agent Loop 集成）已完成，CLI 集成待后续。
+截至 v0.1，步骤 1–7（Parser 本身）已实现并通过测试；步骤 8（Agent Loop 集成）和 CLI 集成都已完成。
 
 ## 12. 已确认决策与开放问题
 

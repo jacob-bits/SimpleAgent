@@ -580,7 +580,7 @@ API Key：llm.api_key 优先，否则读取 llm.api_key_env 指向的环境变�
 推荐实现：
 
 - `-config` 指定配置文件；缺省时只使用默认值。
-- `-model`、`-base-url`、`-min-steps`、`-max-steps`、`-timeout`、`-allowed-root`、`-verbose` 可覆盖配置。
+- `-base-url`、`-model`、`-temperature`、`-max-tokens`、`-llm-timeout`、`-reasoning-effort`、`-min-steps`、`-max-steps`、`-max-repeated-actions`、`-no-progress-threshold`、`-no-progress-min-chars`、`-max-history-chars`、`-timeout`、`-allowed-root`、`-max-file-bytes`、`-verbose` 可覆盖配置；完整列表与 stdin 规则见 [docs/cli.md](docs/cli.md)。
 - 只对“命令行实际出现”的 flag 做覆盖，避免默认零值覆盖配置文件。
 - JSON 解码使用 `DisallowUnknownFields`，尽早暴露拼写错误。
 - 加载后统一执行 `Validate()`，失败直接退出。
@@ -871,7 +871,7 @@ go run ./cmd/agent \
 5. **LLM Adapter**：按 [docs/llm_adapter.md](docs/llm_adapter.md) 实现 OpenAI 兼容客户端；用 `httptest` 验证请求格式、鉴权、非 2xx、空响应、超时/取消和 DeepSeek reasoning 字段，不在这一层做重试。
 6. **Parser**：按 [docs/parser.md](docs/parser.md) 实现“提取第一个合法 JSON 对象 + 字段互斥校验”，覆盖代码块和前后说明文字。
 7. **Agent Loop**：按 [docs/agent_loop.md](docs/agent_loop.md) 接入 `Completer` 接口，用脚本化假 LLM 测完 final、max_steps、重复动作、工具失败结果恢复和预算终止（已实现）。
-8. **CLI**：完成 flag 覆盖、信号处理、stdout/stderr 分离和退出码。
-9. **端到端验证**：本地 mock OpenAI 服务 + 临时文本文件，跑通“读文件 -> 回答”的完整链路，再接入真实模型。
+8. **CLI**：按 [docs/cli.md](docs/cli.md) 完成 flag 覆盖、信号处理、stdout/stderr 分离和退出码（已实现）。
+9. **端到端验证**：本地 mock OpenAI 服务 + 临时文本文件，跑通“读文件 -> 回答”的完整链路，再接入真实模型（mock 端到端已完成，真实模型冒烟待后续）。
 
 每一步都以 `go test ./...` 通过为完成标准；真实 LLM 只用于最后的冒烟测试，不作为自动化测试依赖。

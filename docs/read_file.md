@@ -743,7 +743,7 @@ go test ./... -race
 - [x] NUL、非法 UTF-8 被拒绝。
 - [x] 所有运行期错误不泄露绝对路径。
 - [x] context 取消/超时以 Go error 返回，可映射为 `canceled` / `timeout`。
-- [ ] 通过 Agent + CLI 端到端集成后，越界错误作为 `status="error"` 的 observation 返回（Agent Loop 已实现，CLI/端到端待后续，对应 [DESIGN.md §11.2 第 5 条](../DESIGN.md#L797)）。
+- [x] 通过 Agent + CLI 端到端集成后，越界错误作为 `status="error"` 的 observation 返回（CLI mock 端到端测试覆盖，对应 [DESIGN.md §11.2 第 5 条](../DESIGN.md#L797)）。
 - [x] `go test ./...`、`go vet ./...` 通过。
 
 ## 15. 实现顺序
@@ -758,7 +758,7 @@ go test ./... -race
 
 每一步以 `go test ./...` 通过为完成标准；真实 LLM 不进入本工具的自动化测试。
 
-截至 v0.2，步骤 1–6 已实现并通过测试；步骤 7（Agent 集成）已完成，CLI/端到端集成待后续。
+截至 v0.2，步骤 1–6 已实现并通过测试；步骤 7（Agent 集成）和 CLI mock 端到端集成已完成，真实模型冒烟待后续。
 
 ## 16. 已确认决策与开放问题
 
