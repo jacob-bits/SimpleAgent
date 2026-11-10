@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | v0.1 |
-| 状态 | 已实现，测试通过；Agent 集成待后续 |
+| 状态 | 已实现，测试通过；Agent Loop 已接入 |
 | 日期 | 2026-11-10 |
 | 上位设计 | [DESIGN.md](../DESIGN.md) §5.2、§7 |
 | 关联配置 | [internal/config/config.go](../internal/config/config.go#L36) |
@@ -11,7 +11,7 @@
 | 协议 | OpenAI 兼容 Chat Completions |
 | 供应商验证 | OpenAI 兼容接口；DeepSeek 兼容性见 §10 |
 
-> 本文档描述 LLM 适配层的外部契约与内部实现边界。配置层、工具层和 `internal/llm` 已实现；Agent Loop 与 CLI 尚未实现。
+> 本文档描述 LLM 适配层的外部契约与内部实现边界。配置层、工具层、`internal/llm` 和 Agent Loop 已实现；CLI 尚未实现。
 
 ## 1. 背景与定位
 
@@ -636,7 +636,7 @@ type Completer interface {
 6. `client_test.go`：httptest 覆盖请求/响应/错误/超时/脱敏/DeepSeek 字段。
 7. Agent 集成：用 `Completer` 注入真实 Client 与脚本化假 LLM。
 
-截至 v0.1，步骤 1–6 已实现并通过测试；步骤 7 待 Agent Loop 落地。
+截至 v0.1，步骤 1–6 已实现并通过测试；步骤 7（Agent 集成）已完成，CLI 集成待后续。
 
 ## 15. 关键决策与开放问题
 
@@ -667,7 +667,8 @@ type Completer interface {
 - 配置层：已实现，包含可选字段 `llm.reasoning_effort` 及校验。
 - 工具层：已实现。
 - LLM Adapter：已实现，`internal/llm` 通过 `httptest` 测试与 `-race`。
-- Agent Loop / CLI：尚未实现。
+- Agent Loop：已实现，测试通过。
+- CLI：尚未实现。
 
 已同步：
 

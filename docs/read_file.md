@@ -590,7 +590,7 @@ func openErr(err error) error {
    registry := tool.NewRegistry(rf)
    ```
 
-2. **Prompt**：只使用 `name`、`description` 和由 `Parameters` 生成的 Input Schema（[DESIGN.md §9.2](../DESIGN.md#L733)）。`requires_auth`、`rate_limit`、`timeout_seconds`、`memory_limit_mb`、`sandboxed`、`dangerous`、`cost_per_use` 等策略字段不进入 Prompt。
+2. **Prompt**：只使用 `name`、`description` 和由 `Parameters` 生成的 Input Schema（[DESIGN.md §9.2](../DESIGN.md#L738)）。`requires_auth`、`rate_limit`、`timeout_seconds`、`memory_limit_mb`、`sandboxed`、`dangerous`、`cost_per_use` 等策略字段不进入 Prompt。
 
 3. **Observation**：Agent 根据 `ToolResult` 渲染：
    - `Success=true`：`Output` 为 string 时直接作为正文，其他类型 JSON 序列化；
@@ -618,7 +618,7 @@ func openErr(err error) error {
 - `allowed_root` 默认 `.`，意味着默认可读整个工作区；敏感项目应显式收窄。
 - 配置校验已保证 `allowed_root` 非空、`max_file_bytes > 0`；Tool 构造函数再做一次防御性检查，保证被其他入口复用时也安全。
 - `read_file` 的 `memory_limit_mb=16` 应与配置交叉校验：`16 MiB >= 2 * max_file_bytes + 基础开销`。若调大 `max_file_bytes` 超过该预算，应同步调大元数据或拒绝启动。
-- 工具初始化失败属于配置/用法错误，CLI 退出码为 2（[DESIGN.md §10.2](../DESIGN.md#L768)）。
+- 工具初始化失败属于配置/用法错误，CLI 退出码为 2（[DESIGN.md §10.2](../DESIGN.md#L773)）。
 
 ## 12. 安全分析
 
@@ -743,7 +743,7 @@ go test ./... -race
 - [x] NUL、非法 UTF-8 被拒绝。
 - [x] 所有运行期错误不泄露绝对路径。
 - [x] context 取消/超时以 Go error 返回，可映射为 `canceled` / `timeout`。
-- [ ] 通过 Agent 集成后，越界错误作为 `status="error"` 的 observation 返回（Agent 层待实现，对应 [DESIGN.md §11.2 第 5 条](../DESIGN.md#L792)）。
+- [ ] 通过 Agent + CLI 端到端集成后，越界错误作为 `status="error"` 的 observation 返回（Agent Loop 已实现，CLI/端到端待后续，对应 [DESIGN.md §11.2 第 5 条](../DESIGN.md#L797)）。
 - [x] `go test ./...`、`go vet ./...` 通过。
 
 ## 15. 实现顺序
@@ -758,7 +758,7 @@ go test ./... -race
 
 每一步以 `go test ./...` 通过为完成标准；真实 LLM 不进入本工具的自动化测试。
 
-截至 v0.2，步骤 1–6 已实现并通过测试；步骤 7 待 Agent 层落地。
+截至 v0.2，步骤 1–6 已实现并通过测试；步骤 7（Agent 集成）已完成，CLI/端到端集成待后续。
 
 ## 16. 已确认决策与开放问题
 
@@ -777,7 +777,7 @@ go test ./... -race
 
 ### 16.2 开放问题
 
-1. observation 中的文件正文是否需要做边界转义（例如转义 `</observation>`）。这属于 Agent 层设计，需在实现 Agent 时确定；本工具保持原文。
+1. （已确定）Observation 中的文件正文边界转义见 [Agent Loop 详细设计](agent_loop.md) §12：Agent 用 JSON 对象包装正文，JSON 编码会转义尖括号和 &；本工具仍保持原文。
 2. 是否在 Unix 上额外使用 `O_NONBLOCK` 或 `openat2` 彻底关闭 FIFO/TOCTOU 窗口。当前以 Go 1.22 + 标准库为目标，暂不做平台特定实现。
 3. 是否比较预检查与打开后文件的 `os.SameFile` 以拒绝打开期间被替换的文件。当前作为可选加固，不纳入 v0.2 必做范围。
 4. `memory_limit_mb=16` 与 `max_file_bytes` 的交叉校验是否在构造期强制失败，还是在配置层限制 `max_file_bytes` 上限。当前建议构造期失败。

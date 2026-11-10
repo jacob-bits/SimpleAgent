@@ -579,7 +579,7 @@ return tool.ToolResult{
 6. **多币种**：当前固定 CNY；未来是否需要 `Money{Amount, Currency}`。
 7. **多版本并存**：Registry 是否需要 `name@version` 键与默认版本别名。
 8. **复杂 Schema**：`oneOf`、`anyOf`、条件校验是否需要在参数模型中表达。
-9. **结果渲染**：observation 中的正文边界转义策略（属于 Agent 层）。
+9. **结果渲染**：已由 [Agent Loop 详细设计](agent_loop.md) §12 确定 observation 的 JSON 正文、path 和属性转义策略。
 
 ## 13. 验收标准
 
@@ -591,7 +591,7 @@ return tool.ToolResult{
 - [x] Invoker 能拒绝缺失/类型错误/未知字段，并填充默认值。
 - [x] `ToolResult` 成功/失败约束可校验，执行时间由 Invoker 填充。
 - [x] `sandboxed`、`dangerous`、`requires_auth` 在能力缺失时注册失败。
-- [ ] Prompt 只包含 name、description 和生成的 Input Schema，不包含策略字段（Agent 层待集成）。
+- [x] Prompt 只包含 name、description 和生成的 Input Schema，不包含策略字段（Agent Loop 已实现）。
 - [x] `read_file` 定义使用 `category=file`、`sandboxed=false`、`cost_per_use=0`。
 - [x] `go test ./...`、`go vet ./...` 通过。
 
@@ -602,11 +602,11 @@ return tool.ToolResult{
 - `ToolMetadata`、`ToolParameter`、`ToolDefinition`、`ToolResult` 及默认值、校验、Schema 生成；
 - `MapRegistry`：注册、重名检查、能力 fail-closed、Schema 缓存；
 - `Invoker`：参数校验、默认值、超时、每分钟限流、CNY 分预算、结果归一化和 `ExecutionTimeMS`；
-- `read_file` 工具与完整安全测试。
+- `read_file` 工具与完整安全测试；
+- Prompt 投影已由 Agent Loop 实现，并有投影测试。
 
 尚未实现：
 
-- Prompt 投影（Agent 层）；
 - Authenticator、Approver、SandboxRunner 的实际服务；当前只有注册期能力门控；
 - ARRAY / OBJECT 的嵌套 Schema。
 

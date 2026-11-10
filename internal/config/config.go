@@ -51,7 +51,7 @@ type AgentConfig struct {
 	MaxRepeatedActions  int     `json:"max_repeated_actions"`
 	NoProgressThreshold float64 `json:"no_progress_threshold"`
 	NoProgressMinChars  int     `json:"no_progress_min_chars"`
-	MaxHistoryChars     int     `json:"max_history_chars"`
+	MaxHistoryChars     int     `json:"max_history_chars"` // UTF-8 bytes; name kept for compatibility.
 	TimeoutSeconds      int     `json:"timeout_seconds"`
 	Verbose             bool    `json:"verbose"`
 }
