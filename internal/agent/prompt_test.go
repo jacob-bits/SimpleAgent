@@ -38,6 +38,8 @@ func TestBuildSystemPromptProjectsOnlyPublicToolFields(t *testing.T) {
 		"\"path\"",
 		"\"type\": \"object\"",
 		"status=\"ok\"",
+		"请求澄清",
+		"必须用 final_answer",
 		"output",
 		"error",
 		"<control>",
