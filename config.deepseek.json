@@ -1,0 +1,25 @@
+{
+  "llm": {
+    "base_url": "https://api.deepseek.com",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "model": "deepseek-flash",
+    "temperature": 0,
+    "max_tokens": 1024,
+    "timeout_seconds": 60,
+    "reasoning_effort": "none"
+  },
+  "agent": {
+    "min_steps": 1,
+    "max_steps": 8,
+    "max_repeated_actions": 2,
+    "no_progress_threshold": 0.95,
+    "no_progress_min_chars": 80,
+    "max_history_chars": 200000,
+    "timeout_seconds": 120,
+    "verbose": false
+  },
+  "tools": {
+    "allowed_root": ".",
+    "max_file_bytes": 65536
+  }
+}
