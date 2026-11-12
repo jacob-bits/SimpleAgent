@@ -138,3 +138,11 @@ examples/           演示文本
 - [read_file 详细设计](docs/read_file.md)
 - [Agent Loop 详细设计](docs/agent_loop.md)
 - [CLI 详细设计](docs/cli.md)
+
+## 贡献
+
+分支命名、提交信息、本地门禁与评审流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。提交 PR 前请先运行：
+
+~~~bash
+make check
+~~~

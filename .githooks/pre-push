@@ -1,0 +1,11 @@
+#!/bin/sh
+# 推送前跑一遍与 CI 相同的门禁；紧急情况可用 SKIP_GATE=1 跳过（CI 仍会拦）。
+set -eu
+
+[ "${SKIP_GATE:-0}" = "1" ] && exit 0
+
+if command -v make >/dev/null 2>&1; then
+	make check
+else
+	echo "pre-push: 未找到 make，跳过本地门禁（CI 仍会执行）" >&2
+fi
