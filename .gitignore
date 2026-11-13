@@ -9,6 +9,9 @@ config.json
 .env
 .env.*
 
+# Agent-local credentials and state (never commit)
+.agent/
+
 # Temporary files
 /tmp/
 /tmp-*/
