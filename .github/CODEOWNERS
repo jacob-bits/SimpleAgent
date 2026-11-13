@@ -1,0 +1,11 @@
+# 默认所有路径需要维护者评审。
+# 只有在分支保护中开启 "Require review from Code Owners" 后才生效。
+*                   @jacob-bits
+
+# 核心运行时与安全边界
+/internal/agent/    @jacob-bits
+/internal/llm/      @jacob-bits
+/internal/tool/     @jacob-bits
+
+# 流水线与仓库配置
+/.github/           @jacob-bits
