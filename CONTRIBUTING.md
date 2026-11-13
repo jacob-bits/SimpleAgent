@@ -152,6 +152,8 @@ git config --local core.hooksPath .githooks
 - 合并后发现问题用 `git revert` 开 revert PR，不对 `main` 强制推送
 - 紧急修复同样走 PR（`fix/hotfix-*`），合并后 24 小时内补充测试
 
+维护者侧的完整流程（分诊、门禁、评论规范、合并与 fork 处理）见 [docs/review.md](docs/review.md)。
+
 ## 安全
 
 - API Key 只通过环境变量注入（`llm.api_key_env`），禁止写入任何被跟踪的文件
