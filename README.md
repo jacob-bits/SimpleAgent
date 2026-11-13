@@ -146,3 +146,5 @@ examples/           演示文本
 ~~~bash
 make check
 ~~~
+
+维护者视角的评审流程见 [docs/review.md](docs/review.md)。
