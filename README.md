@@ -147,4 +147,4 @@ examples/           演示文本
 make check
 ~~~
 
-维护者视角的评审流程见 [docs/review.md](docs/review.md)。
+提交方与接受方的完整约束见 [docs/pr-policy.md](docs/pr-policy.md)；维护者评审细节见 [docs/review.md](docs/review.md)。
