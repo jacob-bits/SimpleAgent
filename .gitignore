@@ -16,6 +16,9 @@ config.json
 /tmp/
 /tmp-*/
 
+# Local working notes: agent scratch, snapshots, one-off input material
+/.scratch/
+
 # Editor and OS files
 .DS_Store
 .idea/
